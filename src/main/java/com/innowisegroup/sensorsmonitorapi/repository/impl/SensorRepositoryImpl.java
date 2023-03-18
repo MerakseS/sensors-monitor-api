@@ -7,6 +7,7 @@ import com.innowisegroup.sensorsmonitorapi.repository.SensorRepository;
 
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 
 @Stateless
@@ -26,5 +27,15 @@ public class SensorRepositoryImpl implements SensorRepository {
         return entityManager
             .createNamedQuery("Sensors.findAll", Sensor.class)
             .getResultList();
+    }
+
+    @Override
+    public Sensor findById(long id) {
+        Sensor sensor = entityManager.find(Sensor.class, id);
+        if (sensor == null) {
+            throw new EntityNotFoundException(String.format("Sensor with id %d doesn't exists", id));
+        }
+
+        return sensor;
     }
 }

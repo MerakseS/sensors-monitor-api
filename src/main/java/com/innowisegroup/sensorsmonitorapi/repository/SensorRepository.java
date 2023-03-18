@@ -9,4 +9,6 @@ public interface SensorRepository {
     Sensor create(Sensor sensor);
 
     List<Sensor> findAll();
+
+    Sensor findById(long id);
 }
