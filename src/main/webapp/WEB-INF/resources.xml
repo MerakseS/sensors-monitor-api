@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+    <Resource id="jdbc/sensors_monitor_datasource" type="javax.sql.DataSource">
+        JdbcDriver = org.postgresql.Driver
+        JdbcUrl = jdbc:postgresql://localhost/sensors-monitor
+        UserName = postgres
+        Password = postgres
+        jtaManaged = true
+    </Resource>
+</tomee>
