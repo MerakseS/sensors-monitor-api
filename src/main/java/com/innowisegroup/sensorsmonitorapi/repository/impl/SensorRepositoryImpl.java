@@ -1,5 +1,7 @@
 package com.innowisegroup.sensorsmonitorapi.repository.impl;
 
+import java.util.List;
+
 import com.innowisegroup.sensorsmonitorapi.entity.Sensor;
 import com.innowisegroup.sensorsmonitorapi.repository.SensorRepository;
 
@@ -17,5 +19,12 @@ public class SensorRepositoryImpl implements SensorRepository {
     public Sensor create(Sensor sensor) {
         entityManager.persist(sensor);
         return sensor;
+    }
+
+    @Override
+    public List<Sensor> findAll() {
+        return entityManager
+            .createNamedQuery("Sensors.findAll", Sensor.class)
+            .getResultList();
     }
 }

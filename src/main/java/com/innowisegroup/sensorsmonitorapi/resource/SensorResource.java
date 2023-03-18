@@ -1,5 +1,7 @@
 package com.innowisegroup.sensorsmonitorapi.resource;
 
+import java.util.List;
+
 import com.innowisegroup.sensorsmonitorapi.dto.SensorRequestDto;
 import com.innowisegroup.sensorsmonitorapi.entity.Sensor;
 import com.innowisegroup.sensorsmonitorapi.mapper.SensorMapper;
@@ -40,6 +42,10 @@ public class SensorResource {
 
     @GET
     public Response get() {
-        return Response.ok("Sensor").build();
+        List<Sensor> sensorList = sensorService.getAll();
+
+        return Response
+            .ok(sensorMapper.mapSensorListToResponseDtoList(sensorList))
+            .build();
     }
 }

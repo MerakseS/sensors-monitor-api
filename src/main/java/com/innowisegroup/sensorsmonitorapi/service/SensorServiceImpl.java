@@ -1,5 +1,7 @@
 package com.innowisegroup.sensorsmonitorapi.service;
 
+import java.util.List;
+
 import com.innowisegroup.sensorsmonitorapi.entity.Sensor;
 import com.innowisegroup.sensorsmonitorapi.repository.SensorRepository;
 
@@ -21,5 +23,12 @@ public class SensorServiceImpl implements SensorService {
         sensor = sensorRepository.create(sensor);
         log.info("Successfully created sensor with id {}", sensor.getId());
         return sensor;
+    }
+
+    @Override
+    public List<Sensor> getAll() {
+        List<Sensor> sensorList = sensorRepository.findAll();
+        log.info("Successfully found all sensors");
+        return sensorList;
     }
 }

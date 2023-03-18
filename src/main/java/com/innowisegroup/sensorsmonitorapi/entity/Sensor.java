@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "sensors")
+@NamedQuery(name = "Sensors.findAll", query = "FROM Sensor")
 public class Sensor {
 
     @Id

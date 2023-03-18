@@ -1,5 +1,7 @@
 package com.innowisegroup.sensorsmonitorapi.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -30,6 +32,8 @@ public abstract class SensorMapper {
     @Mapping(target = "type", source = "type.name")
     @Mapping(target = "unit", source = "unit.name")
     public abstract SensorResponseDto mapSensorToResponseDto(Sensor sensor);
+
+    public abstract List<SensorResponseDto> mapSensorListToResponseDtoList(List<Sensor> sensorList);
 
     protected Type getTypeById(long typeId) {
         return typeRepository.findById(typeId);
