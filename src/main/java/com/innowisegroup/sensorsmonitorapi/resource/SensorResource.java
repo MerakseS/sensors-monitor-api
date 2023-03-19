@@ -12,6 +12,7 @@ import jakarta.ejb.EJB;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -69,5 +70,12 @@ public class SensorResource {
         SensorResponseDto sensorResponseDto = sensorMapper.mapSensorToResponseDto(sensor);
 
         return Response.ok(sensorResponseDto).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response delete(@PathParam("id") long id) {
+        sensorService.delete(id);
+        return Response.ok().build();
     }
 }

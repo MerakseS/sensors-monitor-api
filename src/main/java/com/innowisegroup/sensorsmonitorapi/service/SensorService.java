@@ -16,4 +16,6 @@ public interface SensorService {
     Sensor get(long id);
 
     Sensor update(long id, Sensor sensor);
+
+    void delete(long id);
 }

@@ -3,7 +3,7 @@ package com.innowisegroup.sensorsmonitorapi.repository.impl;
 import java.util.List;
 
 import com.innowisegroup.sensorsmonitorapi.entity.Sensor;
-import com.innowisegroup.sensorsmonitorapi.repository.SensorRepository;
+import com.innowisegroup.sensorsmonitorapi.repository.Repository;
 
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -11,7 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 
 @Stateless
-public class SensorRepositoryImpl implements SensorRepository {
+public class SensorRepository implements Repository<Sensor> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -43,5 +43,10 @@ public class SensorRepositoryImpl implements SensorRepository {
     public Sensor update(Sensor sensor) {
         entityManager.merge(sensor);
         return sensor;
+    }
+
+    @Override
+    public void delete(Sensor sensor) {
+        entityManager.remove(sensor);
     }
 }

@@ -10,8 +10,7 @@ import com.innowisegroup.sensorsmonitorapi.dto.SensorResponseDto;
 import com.innowisegroup.sensorsmonitorapi.entity.Sensor;
 import com.innowisegroup.sensorsmonitorapi.entity.Type;
 import com.innowisegroup.sensorsmonitorapi.entity.Unit;
-import com.innowisegroup.sensorsmonitorapi.repository.TypeRepository;
-import com.innowisegroup.sensorsmonitorapi.repository.UnitRepository;
+import com.innowisegroup.sensorsmonitorapi.repository.Repository;
 
 import jakarta.inject.Inject;
 
@@ -19,10 +18,10 @@ import jakarta.inject.Inject;
 public abstract class SensorMapper {
 
     @Inject
-    protected TypeRepository typeRepository;
+    protected Repository<Type> typeRepository;
 
     @Inject
-    protected UnitRepository unitRepository;
+    protected Repository<Unit> unitRepository;
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "type", source = "typeId")
