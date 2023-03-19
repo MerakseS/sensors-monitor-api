@@ -11,4 +11,6 @@ public interface SensorRepository {
     List<Sensor> findAll();
 
     Sensor findById(long id);
+
+    Sensor update(Sensor sensor);
 }

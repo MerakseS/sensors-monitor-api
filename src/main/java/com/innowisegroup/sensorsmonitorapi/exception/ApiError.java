@@ -2,19 +2,18 @@ package com.innowisegroup.sensorsmonitorapi.exception;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
+import jakarta.json.bind.annotation.JsonbDateFormat;
+import jakarta.json.bind.annotation.JsonbNillable;
 import jakarta.ws.rs.core.Response;
 import lombok.Data;
 
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonbNillable(value = false)
 public class ApiError {
 
     private Response.Status status;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonbDateFormat(value = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
 
     private String message;

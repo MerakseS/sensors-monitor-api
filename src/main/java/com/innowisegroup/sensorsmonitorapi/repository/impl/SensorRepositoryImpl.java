@@ -38,4 +38,10 @@ public class SensorRepositoryImpl implements SensorRepository {
 
         return sensor;
     }
+
+    @Override
+    public Sensor update(Sensor sensor) {
+        entityManager.merge(sensor);
+        return sensor;
+    }
 }

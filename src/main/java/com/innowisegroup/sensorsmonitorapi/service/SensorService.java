@@ -14,4 +14,6 @@ public interface SensorService {
     List<Sensor> getAll();
 
     Sensor get(long id);
+
+    Sensor update(long id, Sensor sensor);
 }

@@ -38,4 +38,15 @@ public class SensorServiceImpl implements SensorService {
         log.info("Successfully found sensor with id {}", sensor.getId());
         return sensor;
     }
+
+    @Override
+    public Sensor update(long id, Sensor sensor) {
+        sensorRepository.findById(id);
+
+        sensor.setId(id);
+        sensor = sensorRepository.update(sensor);
+        log.info("Successfully updated sensor with id {}", sensor.getId());
+
+        return sensor;
+    }
 }
