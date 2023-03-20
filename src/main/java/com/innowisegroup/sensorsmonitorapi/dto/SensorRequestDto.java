@@ -2,10 +2,14 @@ package com.innowisegroup.sensorsmonitorapi.dto;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.innowisegroup.sensorsmonitorapi.validation.FieldLessThanAnother;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
+@FieldLessThanAnother(from = "rangeFrom", to = "rangeTo",
+    message = "From should be less than To.")
 public class SensorRequestDto {
 
     @NotBlank(message = "Name is required.")
@@ -29,5 +33,4 @@ public class SensorRequestDto {
 
     @Length(message = "Description length can't be more than 200 symbols.", max = 200)
     private String description;
-
 }

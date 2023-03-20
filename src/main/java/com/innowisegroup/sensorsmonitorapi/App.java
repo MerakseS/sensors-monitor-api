@@ -1,9 +1,10 @@
 package com.innowisegroup.sensorsmonitorapi;
 
-import java.util.HashSet;
 import java.util.Set;
 
+import com.innowisegroup.sensorsmonitorapi.exception.mapper.ConstraintViolationExceptionMapper;
 import com.innowisegroup.sensorsmonitorapi.exception.mapper.EntityNotFoundExceptionMapper;
+import com.innowisegroup.sensorsmonitorapi.exception.mapper.UnknownExceptionMapper;
 import com.innowisegroup.sensorsmonitorapi.resource.SensorResource;
 
 import jakarta.ws.rs.ApplicationPath;
@@ -14,9 +15,11 @@ public class App extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new HashSet<>();
-        resources.add(SensorResource.class);
-        resources.add(EntityNotFoundExceptionMapper.class);
-        return resources;
+        return Set.of(
+            SensorResource.class,
+            EntityNotFoundExceptionMapper.class,
+            ConstraintViolationExceptionMapper.class,
+            UnknownExceptionMapper.class
+        );
     }
 }
