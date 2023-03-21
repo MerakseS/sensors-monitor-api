@@ -2,6 +2,8 @@ package com.innowisegroup.sensorsmonitorapi.resource;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import com.innowisegroup.sensorsmonitorapi.dto.SensorRequestDto;
 import com.innowisegroup.sensorsmonitorapi.dto.SensorResponseDto;
 import com.innowisegroup.sensorsmonitorapi.entity.Sensor;
@@ -19,10 +21,8 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.SecurityContext;
 
 @Path("/sensors")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -36,6 +36,7 @@ public class SensorResource {
     private SensorService sensorService;
 
     @POST
+    @RolesAllowed("ADMINISTRATOR")
     public Response create(@Valid SensorRequestDto sensorRequestDto) {
         Sensor sensor = sensorMapper.mapRequestDtoToSensor(sensorRequestDto);
         sensor = sensorService.create(sensor);
@@ -66,6 +67,7 @@ public class SensorResource {
 
     @PUT
     @Path("{id}")
+    @RolesAllowed("ADMINISTRATOR")
     public Response update(@PathParam("id") long id, SensorRequestDto sensorRequestDto) {
         Sensor sensor = sensorMapper.mapRequestDtoToSensor(sensorRequestDto);
         sensor = sensorService.update(id, sensor);
@@ -76,6 +78,7 @@ public class SensorResource {
 
     @DELETE
     @Path("{id}")
+    @RolesAllowed("ADMINISTRATOR")
     public Response delete(@PathParam("id") long id) {
         sensorService.delete(id);
         return Response.ok().build();

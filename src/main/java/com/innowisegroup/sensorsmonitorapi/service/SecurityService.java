@@ -2,7 +2,9 @@ package com.innowisegroup.sensorsmonitorapi.service;
 
 import com.innowisegroup.sensorsmonitorapi.entity.User;
 
-public interface AuthenticationService {
+import jakarta.ws.rs.core.UriInfo;
+
+public interface SecurityService {
 
     User authenticate(String login, String password);
 
@@ -11,4 +13,6 @@ public interface AuthenticationService {
     String extractUsername(String token);
 
     String extractAuthorities(String token);
+
+    boolean isUriAllowed(UriInfo uriInfo);
 }

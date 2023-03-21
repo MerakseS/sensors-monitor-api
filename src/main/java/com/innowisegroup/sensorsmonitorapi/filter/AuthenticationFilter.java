@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.innowisegroup.sensorsmonitorapi.context.TokenBasedSecurityContext;
-import com.innowisegroup.sensorsmonitorapi.service.AuthenticationService;
+import com.innowisegroup.sensorsmonitorapi.service.SecurityService;
 
 import jakarta.annotation.Priority;
 import jakarta.ejb.EJB;
@@ -14,7 +14,6 @@ import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
-import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.Provider;
 
 @Provider
@@ -24,14 +23,12 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     private static final String AUTHENTICATION_SCHEME = "Bearer ";
     private static final String REALM = "example";
 
-    private static final List<String> allowedUriList = List.of("authenticate");
-
     @EJB
-    private AuthenticationService authenticationService;
+    private SecurityService securityService;
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
-        if (isUriAllowed(requestContext.getUriInfo())) {
+        if (securityService.isUriAllowed(requestContext.getUriInfo())) {
             return;
         }
 
@@ -45,8 +42,8 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
         try {
             boolean isSecure = requestContext.getSecurityContext().isSecure();
-            String username = authenticationService.extractUsername(token);
-            String commaSeparatedAuthorities = authenticationService.extractAuthorities(token);
+            String username = securityService.extractUsername(token);
+            String commaSeparatedAuthorities = securityService.extractAuthorities(token);
             List<String> authorities = Arrays.asList(commaSeparatedAuthorities.split(","));
 
             SecurityContext securityContext = new TokenBasedSecurityContext(username, authorities, isSecure);
@@ -55,16 +52,6 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         catch (Exception e) {
             abortWithUnauthorized(requestContext);
         }
-    }
-
-    private boolean isUriAllowed(UriInfo uriInfo) {
-        for (String allowedUri : allowedUriList) {
-            if (uriInfo.getPath().equals(allowedUri)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private boolean isTokenBasedAuthentication(String authorizationHeader) {

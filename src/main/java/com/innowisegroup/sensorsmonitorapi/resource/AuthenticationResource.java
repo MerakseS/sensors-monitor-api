@@ -3,8 +3,9 @@ package com.innowisegroup.sensorsmonitorapi.resource;
 import com.innowisegroup.sensorsmonitorapi.dto.AuthRequestDto;
 import com.innowisegroup.sensorsmonitorapi.dto.AuthResponseDto;
 import com.innowisegroup.sensorsmonitorapi.entity.User;
-import com.innowisegroup.sensorsmonitorapi.service.AuthenticationService;
+import com.innowisegroup.sensorsmonitorapi.service.SecurityService;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.ejb.EJB;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -20,14 +21,15 @@ import jakarta.ws.rs.core.Response;
 public class AuthenticationResource {
 
     @EJB
-    private AuthenticationService authenticationService;
+    private SecurityService securityService;
 
     @POST
+    @PermitAll
     public Response authenticate(@Valid AuthRequestDto authRequestDto) {
-        User user = authenticationService.authenticate(
+        User user = securityService.authenticate(
             authRequestDto.getLogin(), authRequestDto.getPassword());
 
-        String token = authenticationService.generateToken(user);
+        String token = securityService.generateToken(user);
 
         return Response.ok(new AuthResponseDto(token)).build();
     }

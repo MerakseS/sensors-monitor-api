@@ -2,11 +2,13 @@ package com.innowisegroup.sensorsmonitorapi;
 
 import java.util.Set;
 
+import com.innowisegroup.sensorsmonitorapi.exception.mapper.AccessDeniedExceptionMapper;
 import com.innowisegroup.sensorsmonitorapi.exception.mapper.BadCredentialsExceptionMapper;
 import com.innowisegroup.sensorsmonitorapi.exception.mapper.ConstraintViolationExceptionMapper;
 import com.innowisegroup.sensorsmonitorapi.exception.mapper.EntityNotFoundExceptionMapper;
 import com.innowisegroup.sensorsmonitorapi.exception.mapper.UnknownExceptionMapper;
 import com.innowisegroup.sensorsmonitorapi.filter.AuthenticationFilter;
+import com.innowisegroup.sensorsmonitorapi.filter.AuthorizationFilter;
 import com.innowisegroup.sensorsmonitorapi.resource.AuthenticationResource;
 import com.innowisegroup.sensorsmonitorapi.resource.SensorResource;
 
@@ -23,9 +25,11 @@ public class App extends Application {
             SensorResource.class,
 
             AuthenticationFilter.class,
+            AuthorizationFilter.class,
 
             EntityNotFoundExceptionMapper.class,
             BadCredentialsExceptionMapper.class,
+            AccessDeniedExceptionMapper.class,
             ConstraintViolationExceptionMapper.class,
             UnknownExceptionMapper.class
         );
