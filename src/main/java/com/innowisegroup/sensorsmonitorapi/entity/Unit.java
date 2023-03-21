@@ -22,7 +22,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "units")
-@NamedQuery(name = "Units.findAll", query = "FROM Unit")
+@NamedQuery(name = "Unit.findAll", query = "FROM Unit")
 public class Unit {
 
     @Id

@@ -1,9 +1,10 @@
-package com.innowisegroup.sensorsmonitorapi.service;
+package com.innowisegroup.sensorsmonitorapi.service.impl;
 
 import java.util.List;
 
 import com.innowisegroup.sensorsmonitorapi.entity.Sensor;
 import com.innowisegroup.sensorsmonitorapi.repository.Repository;
+import com.innowisegroup.sensorsmonitorapi.service.SensorService;
 
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
