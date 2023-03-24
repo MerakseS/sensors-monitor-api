@@ -41,6 +41,7 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
+    @Transactional
     public Sensor update(long id, Sensor sensor) {
         sensorRepository.findById(id);
 
@@ -52,6 +53,7 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         Sensor sensor = sensorRepository.findById(id);
         sensorRepository.delete(sensor);

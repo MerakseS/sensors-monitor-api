@@ -68,7 +68,7 @@ public class SensorResource {
     @PUT
     @Path("{id}")
     @RolesAllowed("ADMINISTRATOR")
-    public Response update(@PathParam("id") long id, SensorRequestDto sensorRequestDto) {
+    public Response update(@PathParam("id") long id, @Valid SensorRequestDto sensorRequestDto) {
         Sensor sensor = sensorMapper.mapRequestDtoToSensor(sensorRequestDto);
         sensor = sensorService.update(id, sensor);
         SensorResponseDto sensorResponseDto = sensorMapper.mapSensorToResponseDto(sensor);
