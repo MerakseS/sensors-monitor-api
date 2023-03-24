@@ -14,22 +14,23 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClaims;
-import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.core.UriInfo;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Stateless
+@NoArgsConstructor
+@AllArgsConstructor(onConstructor_ = @Inject)
 public class SecurityServiceImpl implements SecurityService {
 
     private static final String AUTHORITIES_KEY = "authorities";
-
-    private static final String secretKey = "secret_key";
-
-    private static final long sessionTime = 120000000;
+    private static final String SECRET_KEY = "secret_key";
+    private static final long SESSION_TIME = 120000000;
 
     private static final List<String> allowedUriList = List.of("authenticate");
 
-    @EJB
     private UserRepository userRepository;
 
     @Override
@@ -80,8 +81,8 @@ public class SecurityServiceImpl implements SecurityService {
             .setClaims(claims)
             .setSubject(user.getLogin())
             .setIssuedAt(new Date())
-            .setExpiration(new Date(System.currentTimeMillis() + sessionTime))
-            .signWith(SignatureAlgorithm.HS256, secretKey)
+            .setExpiration(new Date(System.currentTimeMillis() + SESSION_TIME))
+            .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
             .compact();
     }
 
@@ -94,7 +95,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     private Claims parseClaims(String token) {
         return Jwts.parser()
-            .setSigningKey(secretKey)
+            .setSigningKey(SECRET_KEY)
             .parseClaimsJws(token)
             .getBody();
     }

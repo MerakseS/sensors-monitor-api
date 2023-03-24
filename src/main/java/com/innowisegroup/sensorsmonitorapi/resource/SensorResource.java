@@ -10,7 +10,6 @@ import com.innowisegroup.sensorsmonitorapi.entity.Sensor;
 import com.innowisegroup.sensorsmonitorapi.mapper.SensorMapper;
 import com.innowisegroup.sensorsmonitorapi.service.SensorService;
 
-import jakarta.ejb.EJB;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -23,16 +22,17 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Path("/sensors")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@NoArgsConstructor
+@AllArgsConstructor(onConstructor_ = @Inject)
 public class SensorResource {
 
-    @Inject
     private SensorMapper sensorMapper;
-
-    @EJB
     private SensorService sensorService;
 
     @POST

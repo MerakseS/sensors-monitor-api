@@ -2,8 +2,10 @@ package com.innowisegroup.sensorsmonitorapi.service;
 
 import com.innowisegroup.sensorsmonitorapi.entity.User;
 
+import jakarta.ejb.Local;
 import jakarta.ws.rs.core.UriInfo;
 
+@Local
 public interface SecurityService {
 
     User authenticate(String login, String password);

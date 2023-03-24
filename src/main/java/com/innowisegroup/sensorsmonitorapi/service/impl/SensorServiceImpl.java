@@ -6,16 +6,19 @@ import com.innowisegroup.sensorsmonitorapi.entity.Sensor;
 import com.innowisegroup.sensorsmonitorapi.repository.Repository;
 import com.innowisegroup.sensorsmonitorapi.service.SensorService;
 
-import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Stateless
+@NoArgsConstructor
+@AllArgsConstructor(onConstructor_ = @Inject)
 public class SensorServiceImpl implements SensorService {
 
-    @EJB
     private Repository<Sensor> sensorRepository;
 
     @Override
