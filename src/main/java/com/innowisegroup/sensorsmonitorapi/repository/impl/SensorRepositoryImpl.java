@@ -11,7 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 
 @Stateless
-public class SensorRepository implements Repository<Sensor> {
+public class SensorRepositoryImpl implements Repository<Sensor> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -41,8 +41,7 @@ public class SensorRepository implements Repository<Sensor> {
 
     @Override
     public Sensor update(Sensor sensor) {
-        entityManager.merge(sensor);
-        return sensor;
+        return entityManager.merge(sensor);
     }
 
     @Override

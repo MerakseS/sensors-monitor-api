@@ -11,7 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 
 @Stateless
-public class UnitRepository implements Repository<Unit> {
+public class UnitRepositoryImpl implements Repository<Unit> {
 
     @PersistenceContext
     private EntityManager entityManager;

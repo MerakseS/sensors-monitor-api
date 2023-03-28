@@ -48,6 +48,7 @@ public class SecurityServiceImpl implements SecurityService {
         }
     }
 
+    @Override
     public boolean isUriAllowed(UriInfo uriInfo) {
         for (String allowedUri : allowedUriList) {
             if (uriInfo.getPath().equals(allowedUri)) {
